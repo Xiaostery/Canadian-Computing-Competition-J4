@@ -1,0 +1,45 @@
+a = []
+poemLines = []
+lastWordList = []
+lastWord = ""
+vowels = "aeiou"
+selectAfter = True
+index = 0
+
+n = int(input("How many verses should be in the poem? "))
+for line in range(n*4):
+    x = input("")
+    x.strip()
+    poemLines.append(x)
+
+for i in poemLines:
+    selectAfter = True
+    lastWordList = []
+    lastWord = ""
+    for s in range(len(i)):
+        j = i[-s-1]
+        if not j in vowels:
+            if selectAfter == True:
+                lastWordList.insert(0,j)
+        else:
+            if selectAfter == True:
+                selectAfter = False
+                lastWordList.insert(0,j)
+                if i[-s-2] in vowels:
+                    lastWordList.insert(0,i[-s-2])
+    for k in lastWordList:
+        lastWord = lastWord + k
+    a.append(lastWord)
+
+for i in range(n):
+    y = i * 4
+    if a[y] == a[y+1] == a[y+2] == a[y+3]:
+        print("perfect")
+    elif a[y] == a[y+1] and a[y+2] == a[y+3]:
+        print("even")
+    elif a[y] == a[y+2] and a[y+1] == a[y+3]:
+        print("cross")
+    elif a[y] == a[y+3] and a[y+1] == a[y+2]:
+        print("shell")
+    else:
+        print("free")
